@@ -1,11 +1,27 @@
 {% extends 'base.html' %}
-{% block title %}Pagina 1{% endblock %}
+{% block title %}Agendamentos{% endblock %}
 {% block content %}
-    <h1>Pagina 1</h1>
+    <h1>Seus Agendamentos</h1>
     <div class="container">
-        {% if user.is_authenticated %}
-            <h1>Olá, {{user.username}}</h1>
-        {% endif %}
+            <div class="row">
+                {% if user.is_authenticated %}
+                    <h2>Olá, {{user.username}}</h2>
+                {% endif %}
+                <a href="{% url 'formulario_agenda' %}" class="btn btn-primary mb-3">Agendar</a>
+                {% for agendamento in agendamentos %}
+                    <div class="col-md-4">
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ agendamento.piscina.endereco }}</h5>
+                                <p class="card-text">{{ agendamento.data }} - {{ agendamento.hora }}</p>
+                                <p class="card-text">{{ agendamento.piscina.detalhes }}</p>
+                            </div>
+                        </div>
+                    </div>
+                {% empty %}
+                    <p>Você não tem nenhum serviço agendado.</p>
+                {% endfor %}
+            </div>
     </div>
     <p>Testando o context Global</p>
     <p>{{social}}</p>

@@ -3,4 +3,5 @@ from myapp import views
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('formulario_agenda', views.agendamento, name='formulario_agenda')
 ]
